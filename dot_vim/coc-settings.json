@@ -1,0 +1,10 @@
+{
+	"suggest.noselect": true,
+	"inlayHint.enable": false,
+	"diagnostic.checkCurrentLine":true,
+	"suggest.detailMaxLength": 50,
+	"diagnostic.errorSign": "❌",
+	"diagnostic.warningSign": "⚠️",
+	"diagnostic.infoSign": "ℹ️",
+	"diagnostic.hintSign": "💡"
+}
