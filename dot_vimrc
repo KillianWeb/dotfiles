@@ -37,7 +37,8 @@ let g:startify_skiplist = ['\..*rc','\.tmux\.conf']
 "Coc.nvim auto install language servers
 let g:coc_global_extensions = [
   \ 'coc-pyright',
-  \ 'coc-clangd'
+  \ 'coc-clangd',
+  \ 'coc-sh'
   \ ]
 " }}}
 "Default Configs {{{
