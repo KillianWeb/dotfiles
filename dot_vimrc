@@ -1,0 +1,139 @@
+" Plugins {{{
+"Install Vim-Plug if not already
+let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
+if empty(glob(data_dir . '/autoload/plug.vim'))
+  silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
+" :PlugInstall and :PlugUpdate and :PlugClean
+call plug#begin()
+"Python Formatter
+Plug 'psf/black', { 'branch': 'stable' } 
+"Home Screen
+Plug 'mhinz/vim-startify'
+"Quick Comments gcc gc
+Plug 'tpope/vim-commentary'
+"Git plugin
+Plug 'tpope/vim-fugitive'
+"LSP for linting/autocomplete
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+call plug#end()
+
+"Startify Config
+let g:startify_bookmarks = [
+    \ {'a': '~/.vimrc'},
+    \ {'s': '~/.bashrc'},
+    \ {'d': '~/.tmux.conf'},    
+    \ {'f': '/home/dylan/Documents/To install'},
+    \]
+let g:startify_commands = [
+    \ { 'w': ['Source Vimrc',':source $MYVIMRC'] },
+    \ { 'r': ['Run PlugUpdate',':PlugUpdate']},]
+let g:startify_custom_header =["    I <3 VIM!!"]
+let g:startify_files_number = 5
+let g:startify_skiplist = ['\..*rc','\.tmux\.conf']
+
+"Coc.nvim auto install language servers
+let g:coc_global_extensions = [
+  \ 'coc-pyright',
+  \ 'coc-clangd'
+  \ ]
+" }}}
+"Default Configs {{{
+source $VIMRUNTIME/defaults.vim
+"Use :Lex to open file browser, o to open in another tab, enter to swap. :Ex
+"to open above current file
+"Folding
+set foldmethod=indent   " fold based on indent, za to toggle fold, zf to create when manual {{{ }}}
+autocmd FileType vim setlocal foldmethod=marker
+set foldlevel=99
+"Configs required(?) for coc.nvim
+set pumheight=10
+set encoding=utf-8
+" Some servers have issues with backup files, see #649
+" set nobackup
+" set nowritebackup
+set updatetime=300
+"set signcolumn=yes "Enable to have consistent gutter left of line numbers
+" }}}
+
+"Prettiness {{{
+syntax on
+set number
+filetype plugin indent on
+set background=dark 
+set cursorline
+colorscheme retrobox
+hi Comment ctermfg=2 
+hi String ctermfg=175 
+hi Function cterm= None ctermfg=67 
+hi Operator ctermfg=220 
+hi Repeat ctermfg=220
+hi Special ctermfg=220
+hi PythonEscape ctermfg=164
+
+"Status Line
+"set laststatus=2
+set statusline=%f         " Path to the file
+set statusline+=\ -\      " Separator
+set statusline+=%y        " File Type
+set statusline+=%=        " Switch to the right side
+set statusline+=%{FugitiveStatusline()} " Current Git Branch
+set statusline+=\         " Separator
+set statusline+=%l        " Current line
+set statusline+=/         " Separator
+set statusline+=%L        " Total lines
+" }}}
+"Keybinds {{{
+"Doesn't save deleted contents to buffer
+noremap dd "_dd
+
+"Coc.nvim keybinds {{{
+" Use `g<leftarrow>` and `g<rightarrow>` to navigate diagnostics, g<downarrow>
+" to show all
+nmap <silent><nowait> g<Left> <Plug>(coc-diagnostic-prev)
+nmap <silent><nowait> g<Right> <Plug>(coc-diagnostic-next)
+nnoremap <silent><nowait> g<Down>  :<C-u>CocList diagnostics<cr>
+" GoTo code definition
+nmap <silent><nowait> gd <Plug>(coc-definition)
+" Manage extensions
+nnoremap <silent><nowait> <leader>e  :<C-u>CocList extensions<cr>
+" Show commands
+nnoremap <silent><nowait> <leader>c  :<C-u>CocList commands<cr>
+" Do default action for next item
+nnoremap <silent><nowait> <leader>j  :<C-u>CocNext<CR>
+" Do default action for previous item
+nnoremap <silent><nowait> <leader>k  :<C-u>CocPrev<CR>
+" Manage extensions
+nnoremap <silent><nowait> <leader>e  :<C-u>CocList extensions<cr>
+" Show commands
+nnoremap <silent><nowait> <leader>c  :<C-u>CocList commands<cr>
+" Do default action for next item
+nnoremap <silent><nowait> <leader>j  :<C-u>CocNext<CR>
+" Do default action for previous item
+nnoremap <silent><nowait> <leader>k  :<C-u>CocPrev<CR>
+" Tab to autocomplete,enter to accept, Ctrl-e to cancel(change keybind later)
+inoremap <silent><expr> <TAB>
+      \ coc#pum#visible() ? coc#pum#next(1) :
+      \ CheckBackspace() ? "\<Tab>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
+
+" Make <CR> to accept selected completion item or notify coc.nvim to format
+" <C-g>u breaks current undo, please make your own choice
+inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
+                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+function! CheckBackspace() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+" Use <c-space> to trigger completion
+if has('nvim')
+  inoremap <silent><expr> <c-space> coc#refresh()
+else
+  inoremap <silent><expr> <c-@> coc#refresh()
+endif
+" }}}
+" }}}
