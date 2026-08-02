@@ -89,7 +89,7 @@ set statusline+=%L        " Total lines
 "Keybinds {{{
 "Doesn't save deleted contents to buffer
 noremap dd "_dd
-"Leader Key
+"Leader Key set to thingy
 
 "Coc.nvim keybinds {{{
 " Use `g<leftarrow>` and `g<rightarrow>` to navigate diagnostics, g<downarrow>
