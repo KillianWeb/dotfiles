@@ -116,7 +116,7 @@ if ! shopt -oq posix; then
   fi
 fi
 
-alias chezmoirefresh="cd ~/.local/share/chezmoi; chezmoi re-add; git add .; git commit -m \"Updated: $(date '+%Y- %m-%d %H:%M:%S')\"; git push"
+alias chezmoirefresh="cd ~/.local/share/chezmoi; chezmoi re-add; git add .; git commit -m \"Updated: $(date '+%Y- %m-%d %H:%M:%S')\"; git push; cd"
 alias virt='source virtenv/bin/activate'
 alias virtpy='virtenv/bin/python'
 alias split='tmux new-session -s DevSplit \; split-window -h \; send-keys -t 1 "vim" Enter \; send-keys -t 0 "clear ; echo "--- -     Split - Pyproj - Virt - ---" ; echo ; ls ; echo" Enter'
