@@ -2,3 +2,5 @@
     bindings = [
         { mouse = "Right", action = "Paste" },
     ]
+[font]
+size = 12.0
