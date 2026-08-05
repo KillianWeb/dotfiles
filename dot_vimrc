@@ -53,6 +53,9 @@ set foldlevel=99
 set pumheight=10 "sets pop ups menu to max 10 lines
 set encoding=utf-8
 set updatetime=300
+"Added to get rid of 'node not executable' error when launching vim directly
+"without terminal for coc.nvim
+let $PATH .= ':' . expand('/home/dylan/.nvm/versions/node/*/bin')
 " }}}
 
 "Prettiness {{{
