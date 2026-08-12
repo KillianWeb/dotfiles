@@ -43,6 +43,7 @@ let g:coc_global_extensions = [
 " }}}
 "Default Configs {{{
 source $VIMRUNTIME/defaults.vim
+set mouse=i
 "Use :Lex to open file browser, o to open in another tab, enter to swap. :Ex
 "to open above current file
 "Folding
