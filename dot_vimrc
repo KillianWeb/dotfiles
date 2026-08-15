@@ -58,7 +58,40 @@ set updatetime=300
 "without terminal for coc.nvim
 let $PATH .= ':' . expand('/home/dylan/.nvm/versions/node/*/bin')
 " }}}
+"Modern Compatibility (per kitty docs){{{
+set ttymouse=sgr
+set balloonevalterm
+" Styled and colored underline support
+let &t_AU = "\e[58:5:%dm"
+let &t_8u = "\e[58:2:%lu:%lu:%lum"
+let &t_Us = "\e[4:2m"
+let &t_Cs = "\e[4:3m"
+let &t_ds = "\e[4:4m"
+let &t_Ds = "\e[4:5m"
+let &t_Ce = "\e[4:0m"
+" Strikethrough
+let &t_Ts = "\e[9m"
+let &t_Te = "\e[29m"
+" Bracketed paste
+let &t_BE = "\e[?2004h"
+let &t_BD = "\e[?2004l"
+let &t_PS = "\e[200~"
+let &t_PE = "\e[201~"
+" Focus tracking
+let &t_fe = "\e[?1004h"
+let &t_fd = "\e[?1004l"
+execute "set <FocusGained>=\<Esc>[I"
+execute "set <FocusLost>=\<Esc>[O"
+" Window title
+let &t_ST = "\e[22;2t"
+let &t_RT = "\e[23;2t"
 
+" vim hardcodes background color erase even if the terminfo file does
+" not contain bce. This causes incorrect background rendering when
+" using a color theme with a background color in terminals such as
+" kitty that do not support background color erase.
+let &t_ut=''
+"}}}
 "Prettiness {{{
 syntax on
 set number
@@ -66,13 +99,14 @@ filetype plugin indent on
 set background=dark 
 set cursorline
 colorscheme retrobox
-hi Comment ctermfg=2 
-hi String ctermfg=175 
-hi Function cterm= None ctermfg=67 
-hi Operator ctermfg=220 
+hi Comment ctermfg=2
+hi String ctermfg=175
+hi Function cterm= None ctermfg=67
+hi Operator ctermfg=220
 hi Repeat ctermfg=220
 hi Special ctermfg=220
 hi PythonEscape ctermfg=164
+
 
 "Status Line
 "set laststatus=2
