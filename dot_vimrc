@@ -46,11 +46,12 @@ source $VIMRUNTIME/defaults.vim
 set mouse=i
 "Folding
 set foldmethod=indent   " za or tab to toggle fold, markers: {{{ }}}
-autocmd FileType vim setlocal foldmethod=marker
-"set foldlevel=99
+"autocmd FileType vim setlocal foldmethod=marker
+set foldlevel=99
 " Save folds when closing file
-autocmd BufWinLeave *.*(?!vimrc) mkview
-autocmd BufWinEnter *.*(?!vimrc) silent loadview 
+autocmd BufWinLeave *.* mkview
+autocmd BufWinEnter *.* silent loadview 
+autocmd BufWinEnter .vimrc setlocal foldmethod=marker 
 "Configs required(?) for coc.nvim
 set pumheight=10 "sets pop ups menu to max 10 lines
 set encoding=utf-8
