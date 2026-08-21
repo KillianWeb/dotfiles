@@ -25,7 +25,7 @@ let g:startify_bookmarks = [
     \ {'a': '~/.vimrc'},
     \ {'s': '~/.bashrc'},
     \ {'d': '~/.tmux.conf'},    
-    \ {'f': '/home/dylan/Documents/To install'},
+    \ {'f': '~/Documents/to_install'},
     \]
 let g:startify_commands = [
     \ { 'w': ['Source Vimrc',':source $MYVIMRC'] },
