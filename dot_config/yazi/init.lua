@@ -1,12 +1,13 @@
 require("bunny"):setup({
   hops = {
-    { key = "/",          path = "/",                                    },
+    { key = "/",          path = "/",              desc = "/"            },
     { key = "1",          path = "~",              desc = "Home"         },
     { key = "3",          path = "~/Documents",    desc = "Documents"    },
     { key = "4",          path = "~/code",         desc = "Code"         },
-    { key = "5",          path = "/usr/share/applications", desc = ".desktop" },
-    { key = "6",          path = "/home/dylan/.local/share/chezmoi", desc = "Chezmoi" },
+    { key = "5",          path = "/usr/share/applications",desc =".desktop"},
+    { key = "6",          path = "~/.local/share/chezmoi",desc ="Chezmoi"},
     { key = "7",          path = "~/.config/yazi", desc = "yazi"         },
+    { key = "8",          path = "~/.config/kitty",desc = "kitty"        },
     { key = "2",          path = "~/.config",      desc = "Config files" },
     { key = "l",          path = "~/.local/share", desc = "Local share"  },
     -- key and path attributes are required, desc is optional
