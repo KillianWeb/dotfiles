@@ -2,3 +2,9 @@
 on   = "f"
 run  = "plugin jump-to-char"
 desc = "Jump to char"
+
+[[mgr.prepend_keymap]]
+desc = "Start bunny.yazi"
+on = "`"
+run = "plugin bunny"
+
